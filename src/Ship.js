@@ -1,34 +1,34 @@
 import './App.css';
 import Draggable from 'react-draggable';
-import React from 'react'
-import { Bullet } from './Bullet'
+import React, {useState} from 'react'
+import { Bullet } from './Bullet.js'
 
 
 export function Ship() {
-    let newBullet;
-    newBullet = React.createElement(Bullet);
-    let listBullets;
+    const [bullets, setBullets]=useState([]);
     const handleStart = () => {
-        const numbers = [1, 2, 3, 4, 5]
-        listBullets = numbers.map((number) => <Bullet/>);
-        // newBullet = React.createElement(Bullet, [],);
-        console.log('click happened');
+        setBullets(...bullets, <Bullet />);
+        
+        console.log('bam')
     }
 
     return (
-        <div style={{ position: 'absolute', bottom: '5%', left: '50%' }}>
-            <Draggable axis="x" handle=".handle"
+        <div style={{position:"absolute", bottom:"10%"}}>
+            <button onClick={handleStart}>Бэм</button>
+
+            <Draggable axis="x" handle=".handle" 
                 grid={[25, 25]}
-                onStart={handleStart}
-                onDrag={handleStart}
+                // onStart={handleStart}
+                // onDrag={handleStart}
                 scale={1}>
-                <div>
-                {listBullets}
+                <div style={{position:"absolute", bottom:"10%"}}>
+                    {bullets}
                     <div className="handle" style={{ userSelect: 'none' }}>
-                            
+
                         <img src={require('./icons/Ship.png')} alt='Weee' style={{ pointerEvents: 'none', userSelect: 'none', width: 100, height: 100 }} />
                     </div>
                 </div>
             </Draggable>
-        </div>)
+            </div>
+    )
 }
