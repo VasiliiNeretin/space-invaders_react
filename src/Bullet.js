@@ -18,11 +18,11 @@ export function Bullet(props) {
 
     const calculatePosition = () => {
         const currBottom = parseInt(bulletRef.current.style.bottom);
-        bulletRef.current.style.bottom = `${currBottom+1}px`;
+        bulletRef.current.style.bottom = `${currBottom+5}px`;
         const invaders = document.querySelectorAll('.Invader');
         invaders.forEach((invader) => {
             const overlap12 = elementsOverlap(bulletRef.current, invader)
-            if (overlap12) {
+            if (overlap12 && invader.style.visibility!='hidden') {
                 invader.style.visibility = 'hidden';
                 bulletRef.current.remove();
             }
@@ -36,7 +36,7 @@ export function Bullet(props) {
     useEffect(() => {
         let myInterval = setInterval(() => {
             calculatePosition();
-        }, 10)
+        }, 0.5)
 
         return () => {
             clearInterval(myInterval);
