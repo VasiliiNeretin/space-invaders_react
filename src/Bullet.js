@@ -1,31 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import './App.css';
-import checkOverlap from 'check-element-overlap';
 
+function elementsOverlap(el1, el2) {
+    const domRect1 = el1.getBoundingClientRect();
+    const domRect2 = el2.getBoundingClientRect();
+  
+    return !(
+      domRect1.top > domRect2.bottom ||
+      domRect1.right < domRect2.left ||
+      domRect1.bottom < domRect2.top ||
+      domRect1.left > domRect2.right
+    );
+  }
 
 export function Bullet(props) {
+    const bulletRef = useRef(null);
 
-    // let listenForOverlap = require('element-overlap').listenForOverlap;
-
-    let interactionCounter = 0;
-    const [bottomSpace, setBottomSpace] = useState(0);
     const calculatePosition = () => {
-        let elem = document.querySelector('div');
-        setBottomSpace((bottomSpace) => bottomSpace + 1);
-
-        document.getElementById('Bullet').style.bottom = `${bottomSpace}px`;
-
-        const invaderRef = document.querySelector('.Invader');
-        const bulletRef = document.querySelector('.Bullet');
-        const overlap12 = checkOverlap(bulletRef, invaderRef);
-        if (overlap12) {
-            if (interactionCounter===0) {
-                console.log(overlap12);
-                invaderRef.remove();
-                // bulletRef.remove();
-                interactionCounter = 1;
+        const currBottom = parseInt(bulletRef.current.style.bottom);
+        bulletRef.current.style.bottom = `${currBottom+1}px`;
+        const invaders = document.querySelectorAll('.Invader');
+        invaders.forEach((invader) => {
+            const overlap12 = elementsOverlap(bulletRef.current, invader)
+            if (overlap12) {
+                invader.style.visibility = 'hidden';
+                bulletRef.current.remove();
             }
-        }
+        })
     };
 
     const styles = {
@@ -35,14 +36,12 @@ export function Bullet(props) {
     useEffect(() => {
         let myInterval = setInterval(() => {
             calculatePosition();
-
         }, 10)
 
         return () => {
             clearInterval(myInterval);
-
         }
-    });
+    }, []);
 
     // const onIntersection = (entries) => {
     //     for (const entry of entries) {
@@ -55,6 +54,6 @@ export function Bullet(props) {
     // const observer = new IntersectionObserver(onIntersection);
     // observer.observe(document.querySelector('img'));
     return (
-        <img id='Bullet' className='Bullet' src={require('./icons/Ship.png')} alt='Peow' style={styles} />
+        <img ref={bulletRef} id='Bullet' className='Bullet' src={require('./icons/Ship.png')} alt='Peow' style={styles} />
     )
 }
