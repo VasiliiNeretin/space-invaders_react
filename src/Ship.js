@@ -5,16 +5,16 @@ import { Bullet } from './Bullet.js'
 
 
 export function Ship() {
-    const [bullets, setBullets]=useState([]);
+    const [bullets, setBullets] = useState([]);
     const handleStart = () => {
-        setBullets(...bullets, <Bullet />);
+        setBullets(bullets => [...bullets, <Bullet />]);
         
         console.log('bam')
     }
 
     return (
         <div style={{position:"absolute", bottom:"10%"}}>
-            <button onClick={handleStart}>Бэм</button>
+            <button onClick={handleStart} style={{width:50, height:50}}>Бэм</button>
 
             <Draggable axis="x" handle=".handle" 
                 grid={[25, 25]}

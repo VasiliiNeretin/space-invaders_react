@@ -52,7 +52,7 @@ const [invading, setInvading] = useState(false);
                 position: 'absolute', width: '100%', height: 200, top: 0, left: 50,
                 alignContent: 'center',
                 justifyContent: 'center', display: 'grid',
-                gridGap: 12, backgroundColor: 'lightgreen',
+                gridGap: 12,
                 gridTemplateColumns: '8vw 8vw 8vw 8vw 8vw 8vw 8vw 8vw ',
             }}>
 
