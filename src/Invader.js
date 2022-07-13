@@ -12,16 +12,18 @@ function elementsOverlap(el1, el2) {
     );
 }
 
-export function Invader() {
-    
+export function Invader(props) {
+
     const invaderRef = useRef(null);
 
     useEffect(() => {
         let myInterval = setInterval(() => {
-            if (elementsOverlap(invaderRef.current, document.getElementById('ship'))) {
-                console.log('Dead');
+            if (elementsOverlap(invaderRef.current, document.getElementById('Ship'))) {
+                
+                props.endFunc();
+                clearInterval(myInterval);
             }
-        }, 1000)
+        }, 10)
         return () => {
             clearInterval(myInterval);
         }

@@ -1,32 +1,37 @@
 import { Invader } from './Invader.js'
 import React, { useState, useEffect } from 'react'
 
-export function InvadersArmy() {
+export function InvadersArmy(props) {
 
-    
+
     let invaders = [];
+    const stopInvasion = () => {
+        setInvading(false);
+        props.endFunc()
+    }
     const spawnInvaders = () => {
         for (let i = 0; i < 8 * 3; i++) {
-            invaders[i] = <Invader />;
+            invaders[i] = <Invader endFunc={stopInvasion} />;
         }
     }
-    
+
     spawnInvaders();
-    console.log(invaders.length);
 
     const [topSpace, setTopSpace] = useState(20);
 
     const calculatePosition = () => {
         let elem = document.querySelector('div');
         setTopSpace((topSpace) => topSpace + 20);
-        document.getElementById('invaders').style.top = `${topSpace}px`;
-        console.log(document.getElementById('invaders').style.top);
+        document.getElementById('Invaders').style.top = `${topSpace}px`;
     };
 
     const [invading, setInvading] = useState(true);
     const handleClick = () => {
         setInvading(!invading);
     }
+
+
+
     useEffect(() => {
 
         let myInterval = setInterval(() => {
@@ -34,7 +39,6 @@ export function InvadersArmy() {
                 calculatePosition();
             };
         }, 1000)
-        console.log('Effect smashed');
 
         return () => {
             clearInterval(myInterval);
@@ -45,7 +49,7 @@ export function InvadersArmy() {
     return (
         <div>
 
-            <div id='invaders' style={{
+            <div id='Invaders' style={{
                 position: 'absolute', width: '100%', height: 200, top: 0, left: 50,
                 alignContent: 'center',
                 justifyContent: 'center', display: 'grid',
