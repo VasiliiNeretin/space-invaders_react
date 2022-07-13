@@ -30,7 +30,7 @@ export function Ship() {
             <div>
                 {bullets}
             </div>
-            <button onClick={handleStart} style={{ position: 'absolute', width: 50, height: 50 }}>Бэм</button>
+            
 
             <Draggable axis="x" handle=".handle"
                 grid={[25, 25]}
@@ -41,7 +41,7 @@ export function Ship() {
 
                 scale={1}
                 left={'50%'}>
-                <div id={'Ship'} style={{ position: "absolute", bottom: "10%" }}>
+                <div id={'Ship'} style={{ position: "absolute", left:'50%', bottom: "10%" }}>
 
                     <div className="handle" style={{ userSelect: 'none' }}>
 
