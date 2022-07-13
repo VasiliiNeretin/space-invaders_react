@@ -12,7 +12,7 @@ export function Ship() {
 
     const handleStart = () => {
         setMyInterval(setInterval(() => {
-            let shipPosition = document.getElementById('ship').getBoundingClientRect();
+            let shipPosition = document.getElementById('Ship').getBoundingClientRect();
             setBullets(bullets => [...bullets, <Bullet defaultPosition={shipPosition} />]);
             console.log(shipPosition.x);
         }, 1000))
