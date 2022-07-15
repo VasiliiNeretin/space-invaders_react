@@ -1,5 +1,6 @@
 import { Invader } from './Invader.js'
 import React, { useState, useEffect } from 'react'
+import { RegularButton } from 'fronton-react';
 
 export function InvadersArmy(props) {
 
@@ -59,7 +60,7 @@ export function InvadersArmy(props) {
 
                 {invaders}
             </div>
-            <button style={{ position: 'absolute', top: 5 }} onClick={handleClick}> Начать захват!</button>
+            <RegularButton style={{ position: 'absolute', top: 5 }} onClick={handleClick}> Начать захват!</RegularButton>
         </div>
     )
 }

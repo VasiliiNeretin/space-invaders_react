@@ -1,20 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
 import { Ship } from './Ship.js'
 import React, { useState } from 'react'
 import { InvadersArmy } from './InvadersArmy.js'
-
+import { RegularButton } from 'fronton-react';
 
 function App() {
 
   const [gameOver, setGameOver] = useState(false);
 
   const handleReset = () => {
-    window.location.reload(true)
+    setGameOver(false);
+    window.location.reload(true);
   }
 
   const endGame = () => {
-    console.log('GameOver')
+    console.log('GameOver');
     setGameOver(true);
   }
 
@@ -32,7 +32,13 @@ function App() {
             transform: 'translate(-50%, -50%)',
             color: 'red', fontSize: '6vh'
           }}>Game Over!</div>
-          <button style={{ position: 'absolute',fontSize:'4vh', alignSelf: 'center', display:'flex', justifyContent:'center',  transform:'translate(-50%,-50%)', left: '50%', bottom: '30%' }} onClick={handleReset}>Начать сначала!</button>
+          <RegularButton style={{
+            position: 'absolute', fontSize: '4vh',
+            alignSelf: 'center', display: 'flex', justifyContent: 'center',
+            transform: 'translate(-50%,-50%)',
+            left: '50%', bottom: '30%'
+          }}
+            onClick={handleReset}>Начать сначала!</RegularButton>
         </div>
       }
     </div>

@@ -25,6 +25,7 @@ export function Bullet(props) {
             if (overlap12 && invader.style.visibility != 'hidden') {
                 invader.style.visibility = 'hidden';
                 bulletRef.current.remove();
+                console.log(document.getElementById('Invaders').style.gridTemplateColumns)
             }
         })
     };
