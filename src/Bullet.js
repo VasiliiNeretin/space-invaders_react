@@ -34,7 +34,7 @@ export function Bullet(props) {
         position: 'absolute',
         top: props.defaultPosition.y,
         left: props.defaultPosition.x+45,
-        width: 10, height: 10, background: 'blue'
+        width: 10, height: 10, background: 'transparent'
     }
 
     useEffect(() => {

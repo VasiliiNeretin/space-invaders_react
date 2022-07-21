@@ -1,3 +1,4 @@
+import { GridItem } from 'fronton-react';
 import React, { useEffect, useRef } from 'react'
 
 function elementsOverlap(el1, el2) {
@@ -16,13 +17,18 @@ export function Invader(props) {
 
     const invaderRef = useRef(null);
 
+    const checkInvadersRow = () => {
+
+    }
+
     useEffect(() => {
         let myInterval = setInterval(() => {
             if (elementsOverlap(invaderRef.current, document.getElementById('Ship'))) {
-                
+
                 props.endFunc();
                 clearInterval(myInterval);
             }
+
         }, 10)
         return () => {
             clearInterval(myInterval);
@@ -30,7 +36,9 @@ export function Invader(props) {
     });
 
     return (
-        <img id={'Invader'} ref={invaderRef} className='Invader' src={require('./icons/SpaceInvader1.png')} alt='Rondondon'
-            style={{ width: 50, height: 50, backgroundColor: 'transparent' }} />
+        <GridItem>
+            <img id={'Invader'} ref={invaderRef} className='Invader' src={require('./icons/SpaceInvader1.png')} alt='Rondondon'
+                style={{ width: 50, height: 50, backgroundColor: 'transparent' }} />
+        </GridItem>
     )
 }
